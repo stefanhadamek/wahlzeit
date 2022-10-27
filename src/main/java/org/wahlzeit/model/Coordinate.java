@@ -36,4 +36,11 @@ package org.wahlzeit.model;
     public void setZ(double setz){
         this.z = setz;
     }
+    public double getDistance(Coordinate coord){
+        return 0.0;
+
+    }
+    public boolean isEqual(Coordinate coord){
+        return false;
+    }
 }
