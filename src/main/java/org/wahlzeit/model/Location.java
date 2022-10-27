@@ -9,7 +9,9 @@ public class Location {
     public Coordinate coordinate;
 
     public Location(Coordinate coordinatenew){
+        if(coordinatenew != null ){
         this.coordinate =coordinatenew;
+        }
     }
 
     public Coordinate getCoordinate(){
