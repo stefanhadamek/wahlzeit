@@ -169,7 +169,11 @@ public class Photo extends DataObject {
 		rset.updateInt("status", status.asInt());
 		rset.updateInt("praise_sum", praiseSum);
 		rset.updateInt("no_votes", noVotes);
-		rset.updateLong("creation_time", creationTime);		
+		rset.updateLong("creation_time", creationTime);
+		if(location != null){
+			rset.updateDouble("loc_coord", location.getCoordinate());
+		}
+			
 	}
 
 	/**
@@ -468,5 +472,6 @@ public class Photo extends DataObject {
 	}
 	public void setLocation(Location location){
 		this.location = location;
+		incWriteCount();
 	}
 }
