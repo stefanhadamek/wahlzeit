@@ -46,6 +46,6 @@ public class CoordinateTests{
         Coordinate zwei = new Coordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));
         assertEquals(false,th.isEqual(null));
-        //assertEquals(th.getZ(),zwei.getZ());
+        
     }
 }
