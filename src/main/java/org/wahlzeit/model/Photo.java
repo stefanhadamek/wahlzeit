@@ -96,7 +96,7 @@ public class Photo extends DataObject {
 	 */
 	public Photo() {
 		id = PhotoId.getNextId();
-		1unt();
+		incWriteCount();
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class Photo extends DataObject {
 		creationTime = rset.getLong("creation_time");
 
 		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
-		public Location location=new Location(new Coordinate(rset.getDouble("loc_x_coord"),rset.getDouble("loc_y_coord"),rset.getDouble("loc_z_coord")));
+		location=new Location(new Coordinate(rset.getDouble("loc_x_coord"),rset.getDouble("loc_y_coord"),rset.getDouble("loc_z_coord")));
 	}
 	
 	/**

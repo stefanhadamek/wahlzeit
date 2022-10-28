@@ -30,4 +30,22 @@ public class CoordinateTests{
         assertEquals(y,coord.getY(),0);
         assertEquals(z,coord.getZ(),0);
     }
+    @Test
+    public void getDistanceTester(){
+        Coordinate th = new Coordinate(1,1,4);
+        Coordinate zwei = new Coordinate(1,1,2);
+        //System.out.println();
+        System.out.println(th.getDistance(zwei));
+        
+        assertEquals(2.0, th.getDistance(zwei),0);
+
+    }
+    @Test
+    public void checkEquals(){
+        Coordinate th = new Coordinate(1,1,1);
+        Coordinate zwei = new Coordinate(1,1,1);
+        assertEquals(true,th.isEqual(zwei));
+        assertEquals(false,th.isEqual(null));
+        //assertEquals(th.getZ(),zwei.getZ());
+    }
 }

@@ -1,8 +1,8 @@
-import java.lang.*;
+
 package org.wahlzeit.model;
+import java.lang.*;
 
-
- public class Coordinate{
+public class Coordinate{
     
     
     private double x;
@@ -36,34 +36,32 @@ package org.wahlzeit.model;
     public void setZ(double setz){
         this.z = setz;
     }
+    
     public double getDistance(Coordinate coord){
         //creating zwierg to plug in for eucleading distance 
-        double zwierg= Math.pow(other.x - this.x,2) + Math.pow(other.y - this.y,2) + Math.pow(other.z-this.z,2);
+        double zwierg= Math.pow(coord.x - this.x,2) + Math.pow(coord.y - this.y,2) + Math.pow(coord.z-this.z,2);
         double erg = Math.sqrt(zwierg);
         // return erg
         return erg;
 
     }
     public boolean isEqual(Coordinate coord){
-       //Checking Base-Case
         if(coord == null){
-        return false;
-        }
-        //Using overwritten Method
-        else if (this.equals(coord)){
-        return this.equals(coord);
-        }else {
-            //Using Java implemented equals Method
-            boolean erg=( ((Double) this.getX()).equals(coord.getX()) && ((Double) this.getY()).equals(coord.getY()) && ((Double) this.getZ()).equals(coord.getZ()) );
-            return erg;
-        }
-    
-    @Override 
-    public boolean equals(Object coord){
-        if(coord instanceof Coordinate){
-            return this.isEqual((Coordinate) coord);
-        } else{
             return false;
-        }   
+        }
+        if(this.equals(coord)){
+            if(this == coord){return true;}
+            return (this.x == coord.x) && (this.y == coord.y) && (this.z == coord.z);
+        }
+        return false;
+    }
+
+    @Override 
+    public boolean equals( Object obj){
+        if(obj instanceof Coordinate){
+            return true;
+        }
+        return false;
+
     }
 }

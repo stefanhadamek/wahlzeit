@@ -14,12 +14,14 @@ public class LocationTests{
         Location loc = new Location(coord);
         assertEquals(coord,loc.getCoordinate());
     }
+    // Test wont work anymore since i made sure there always will be an instance created 
+    /*
     @Test
     public void CreateEmptyLocationTest(){
         Location loc = new Location(null);
         assertEquals(null,loc.getCoordinate());
     }
-    
+    */
     @Test
     public void setCoordinateTestonEmptyLoc(){
         Location loc = new Location(null);
