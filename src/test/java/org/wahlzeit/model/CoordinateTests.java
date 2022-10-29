@@ -41,7 +41,17 @@ public class CoordinateTests{
 
     }
     @Test
-    public void checkEquals(){
+    public void checkisEquals(){
+        Coordinate th = new Coordinate(1,1,1);
+        Coordinate zwei = new Coordinate(1,1,1);
+        assertEquals(true,th.isEqual(zwei));
+        assertEquals(false,th.isEqual(null));
+        
+    }
+
+    //TODO test the overwritten equals method
+    @Test
+    public void checkequals(){
         Coordinate th = new Coordinate(1,1,1);
         Coordinate zwei = new Coordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));

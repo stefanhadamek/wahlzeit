@@ -49,17 +49,16 @@ public class Coordinate{
         if(coord == null){
             return false;
         }
-        if(this.equals(coord)){
-            if(this == coord){return true;}
-            return (this.x == coord.x) && (this.y == coord.y) && (this.z == coord.z);
-        }
-        return false;
+        if(this == coord){
+            return true;
+            }
+        return (this.x == coord.x) && (this.y == coord.y) && (this.z == coord.z);
     }
 
     @Override 
     public boolean equals( Object obj){
         if(obj instanceof Coordinate){
-            return true;
+            return this.isEqual((Coordinate) obj);
         }
         return false;
 
