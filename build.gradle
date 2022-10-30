@@ -5,7 +5,8 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    //Bintray ist out 
+    //jcenter()
     mavenCentral()
 }
 
