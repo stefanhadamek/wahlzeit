@@ -75,13 +75,17 @@ public class PhotoTests{
         assertEquals(StringUtil.asUrl("https://www.google.com/"), ph.getOwnerHomePage());
         assertEquals(187, ph.getWidth());
         assertEquals(6969, ph.getHeight());
+
         assertEquals(new Tags("rbv10"), ph.getTags());
         assertEquals(PhotoStatus.getFromInt(6), ph.getStatus());
         
         assertEquals(187187187L, ph.getCreationTime());
-        assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getX(),ph.getLocation().getCoordinate().getX(),0);
-        assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getY(),ph.getLocation().getCoordinate().getY(),0);
-        assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getZ(),ph.getLocation().getCoordinate().getZ(),0);
+        Location loc = new Location(new Coordinate(1.87,1.337,1.69));
+
+        assertEquals(true,loc.getCoordinate().isEqual(ph.getLocation().getCoordinate()));
+        //assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getX(),ph.getLocation().getCoordinate().getX(),0);
+        //assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getY(),ph.getLocation().getCoordinate().getY(),0);
+        //assertEquals(new Location(new Coordinate(1.87,1.337,1.69)).getCoordinate().getZ(),ph.getLocation().getCoordinate().getZ(),0);
         
         //assertEquals(new Location(1.1, 1.2, 1.3), photo.getLocation().get());
     }
