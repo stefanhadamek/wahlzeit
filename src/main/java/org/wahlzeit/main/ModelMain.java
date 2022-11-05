@@ -79,7 +79,7 @@ public abstract class ModelMain extends AbstractMain {
 		userManager.addUser(user);
 		
 		//PhotoManager photoManager = PhotoManager.getInstance();
-		F1CarsPhotoManager photoManager = F1CarsPhotoManager.getInstance();
+		F1CarsPhotoManager photoManager = F1CarsPhotoManager.getManager();
 		File photoDirFile = new File(photoDir);
 		FileFilter photoFileFilter = new FileFilter() {
 			public boolean accept(File file) {
@@ -167,7 +167,7 @@ public abstract class ModelMain extends AbstractMain {
 	public void saveAll() throws SQLException {
 		PhotoCaseManager.getInstance().savePhotoCases();
 		//PhotoManager.getInstance().savePhotos();
-		F1CarsPhotoManager.getInstance().savePhotos();			
+		F1CarsPhotoManager.getManager().savePhotos();			
 		UserManager.getInstance().saveUsers();
 
 		saveGlobals();

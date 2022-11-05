@@ -1,7 +1,8 @@
-package java.wahlzeit.model;
+package org.wahlzeit.model;
+
 
 import java.sql.*;
-import java.wahlzeit.services;
+
 
 public class F1CarsPhotoFactory extends PhotoFactory {
 
@@ -25,6 +26,9 @@ public class F1CarsPhotoFactory extends PhotoFactory {
 
         }
         factory = carFactory;
+    }
+    public static void initialize() {
+		getInstance();
     }
 
     @Override

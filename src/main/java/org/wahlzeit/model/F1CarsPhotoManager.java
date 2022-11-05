@@ -1,7 +1,7 @@
 package org.wahlzeit.model;
 
 import java.sql.*;
-
+import java.io.File;
 public class F1CarsPhotoManager extends PhotoManager {
 
     private static final F1CarsPhotoManager instance = new F1CarsPhotoManager();
@@ -14,11 +14,11 @@ public class F1CarsPhotoManager extends PhotoManager {
         return instance;
     }
 
-    public F1CarsPhoto createPhoto(File file ) throws Exception {
+    public F1CarsPhoto createPhoto(File file) throws Exception {
         return (F1CarsPhoto) (super.createPhoto(file));
     }
 
-    protected F1CarsPhoto createObject(Result rset) throws SQLException {
+    protected F1CarsPhoto createObject(ResultSet rset) throws SQLException {
         return F1CarsPhotoFactory.getFactory().createPhoto(rset);
     }
 }
