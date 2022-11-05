@@ -31,7 +31,8 @@ public abstract class ModelMain extends AbstractMain {
 		
  		loadGlobals();
 
-		PhotoFactory.initialize();
+		F1CarsPhotoFactory.initialize();
+		//PhotoFactory.initialize();
 	}
 	
 	/**
@@ -77,7 +78,8 @@ public abstract class ModelMain extends AbstractMain {
 		User user = new User(userName, password, emailAddress, confirmationCode);
 		userManager.addUser(user);
 		
-		PhotoManager photoManager = PhotoManager.getInstance();
+		//PhotoManager photoManager = PhotoManager.getInstance();
+		F1CarsPhotoManager photoManager = F1CarsPhotoManager.getInstance();
 		File photoDirFile = new File(photoDir);
 		FileFilter photoFileFilter = new FileFilter() {
 			public boolean accept(File file) {
@@ -87,7 +89,8 @@ public abstract class ModelMain extends AbstractMain {
 
 		File[] photoFiles = photoDirFile.listFiles(photoFileFilter);
 		for (int i = 0; i < photoFiles.length; i++) {
-			Photo newPhoto = photoManager.createPhoto(photoFiles[i]);
+			//Photo newPhoto = photoManager.createPhoto(photoFiles[i]);
+			F1CarsPhoto newPhoto = photoManager.createPhoto(photoFiles[i]);
 			user.addPhoto(newPhoto);
 		}
 	}
@@ -163,7 +166,8 @@ public abstract class ModelMain extends AbstractMain {
 	 */
 	public void saveAll() throws SQLException {
 		PhotoCaseManager.getInstance().savePhotoCases();
-		PhotoManager.getInstance().savePhotos();			
+		//PhotoManager.getInstance().savePhotos();
+		F1CarsPhotoManager.getInstance().savePhotos();			
 		UserManager.getInstance().saveUsers();
 
 		saveGlobals();
