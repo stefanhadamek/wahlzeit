@@ -15,7 +15,7 @@ public class F1CarsPhotoFactory extends PhotoFactory {
     public static synchronized F1CarsPhotoFactory getFactory(){
         if(factory == null){
 
-            setInstance(new F1CarsPhotoFactory());
+            setFactory(new F1CarsPhotoFactory());
         }
         return factory;
     }
@@ -27,6 +27,7 @@ public class F1CarsPhotoFactory extends PhotoFactory {
         }
         factory = carFactory;
     }
+
     public static void initialize() {
 		getInstance();
     }

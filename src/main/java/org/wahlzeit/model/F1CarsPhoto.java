@@ -27,12 +27,12 @@ public class F1CarsPhoto extends Photo {
     @Override
     public void readFrom(ResultSet rset) throws SQLException {
         super.readFrom(rset);
-        model = rset.getString("F1_Car_Model");
+        model = rset.getString("car_model");
     }
 
     @Override 
     public void writeOn(ResultSet rset) throws SQLException {
         super.writeOn(rset);
-        rset.updateString("F1_Car_Model", model);
+        rset.updateString("car_model", model);
     }
 }
