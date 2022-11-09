@@ -12,7 +12,7 @@ public class F1CarsPhotoFactory extends PhotoFactory {
         super();
     }
 
-    public static synchronized F1CarsPhotoFactory getFactory(){
+    protected static synchronized F1CarsPhotoFactory getFactory(){
         if(factory == null){
 
             setFactory(new F1CarsPhotoFactory());

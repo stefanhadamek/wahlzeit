@@ -10,9 +10,9 @@ public class LocationTests{
         double x = 42;
         double y= 187;
         double z= 1337;
-        Coordinate coord = new Coordinate(x,y,z);
+        CartesianCoordinate coord = new CartesianCoordinate(x,y,z);
         Location loc = new Location(coord);
-        assertEquals(coord,loc.getCoordinate());
+        assertEquals(coord,loc.getCoordinate().asCartesianCoordinate());
     }
     // Test wont work anymore since i made sure there always will be an instance created 
     /*
@@ -25,9 +25,9 @@ public class LocationTests{
     @Test
     public void setCoordinateTestonEmptyLoc(){
         Location loc = new Location(null);
-        Coordinate coord = new Coordinate(1,8,7);
+        CartesianCoordinate coord = new CartesianCoordinate(1,8,7);
         loc.setCoordinate(coord);
-        assertEquals(coord,loc.getCoordinate());
+        assertEquals(coord,loc.getCoordinate().asCartesianCoordinate());
 
     }
 }

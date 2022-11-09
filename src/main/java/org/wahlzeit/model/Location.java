@@ -10,18 +10,18 @@ public class Location {
 
     public Location(Coordinate coordinatenew){
         if(coordinatenew != null ){
-        this.coordinate =coordinatenew;
+        this.coordinate =coordinatenew.asCartesianCoordinate();
         }
         else{
             // create default Coord to ensure no failure
-            Coordinate coord = new Coordinate(0,0,0);
+            Coordinate coord = new CartesianCoordinate(0,0,0);
             this.coordinate = coord;
             
         }
     }
 
     public Coordinate getCoordinate(){
-        return this.coordinate;
+        return this.coordinate.asCartesianCoordinate();
     }
     public void setCoordinate(Coordinate coord){
          this.coordinate =coord;

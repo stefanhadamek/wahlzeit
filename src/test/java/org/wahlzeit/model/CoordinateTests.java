@@ -11,7 +11,7 @@ public class CoordinateTests{
         double x = 42;
         double y= 187;
         double z= 1337;
-        Coordinate coord = new Coordinate(x,y,z);
+        CartesianCoordinate coord = new CartesianCoordinate(x,y,z);
       
         assertEquals(42.0,coord.getX(),0);
         assertEquals(187.0,coord.getY(),0);
@@ -22,7 +22,7 @@ public class CoordinateTests{
         double x = 42.0;
         double y= 187.0;
         double z= 1337.0;
-        Coordinate coord = new Coordinate(0,0,0);
+        CartesianCoordinate coord = new CartesianCoordinate(0,0,0);
         coord.setX(x);
         coord.setY(y);
         coord.setZ(z);
@@ -32,8 +32,8 @@ public class CoordinateTests{
     }
     @Test
     public void getDistanceTester(){
-        Coordinate th = new Coordinate(1,1,4);
-        Coordinate zwei = new Coordinate(1,1,2);
+        CartesianCoordinate th = new CartesianCoordinate(1,1,4);
+        CartesianCoordinate zwei = new CartesianCoordinate(1,1,2);
         //System.out.println();
         System.out.println(th.getDistance(zwei));
         
@@ -42,8 +42,8 @@ public class CoordinateTests{
     }
     @Test
     public void checkisEquals(){
-        Coordinate th = new Coordinate(1,1,1);
-        Coordinate zwei = new Coordinate(1,1,1);
+        CartesianCoordinate th = new CartesianCoordinate(1,1,1);
+        CartesianCoordinate zwei = new CartesianCoordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));
         assertEquals(false,th.isEqual(null));
         
@@ -52,8 +52,8 @@ public class CoordinateTests{
     //TODO test the overwritten equals method
     @Test
     public void checkequals(){
-        Coordinate th = new Coordinate(1,1,1);
-        Coordinate zwei = new Coordinate(1,1,1);
+        CartesianCoordinate th = new CartesianCoordinate(1,1,1);
+        CartesianCoordinate zwei = new CartesianCoordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));
         assertEquals(false,th.isEqual(null));
         
