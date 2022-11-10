@@ -108,6 +108,6 @@ public class CartesianCoordinate implements Coordinate {
     @Override
     public boolean isEqual(Coordinate other){
         other = other.asCartesianCoordinate();
-        return this.isEqual(other);
+        return this.isEqual(other.asCartesianCoordinate());
     }
 }
