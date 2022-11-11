@@ -45,4 +45,8 @@ public class F1CarsPhotoFactory extends PhotoFactory {
     public F1CarsPhoto createPhoto(ResultSet rset) throws SQLException{
         return new F1CarsPhoto(rset);
     }
+    @Override 
+    public PhotoFilter createPhotoFilter() {
+		return new PhotoFilter();
+	}
 }
