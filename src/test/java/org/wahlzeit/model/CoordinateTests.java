@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class CoordinateTests{
 
     @Test
-    public void createLocationTest(){
+    public void createCarCoordTest(){
         double x = 42;
         double y= 187;
         double z= 1337;
@@ -35,9 +35,9 @@ public class CoordinateTests{
         CartesianCoordinate th = new CartesianCoordinate(1,1,4);
         CartesianCoordinate zwei = new CartesianCoordinate(1,1,2);
         //System.out.println();
-        System.out.println(th.getDistance(zwei));
+        //System.out.println(th.getCartesianDistance(zwei));
         
-        assertEquals(2.0, th.getDistance(zwei),0);
+        assertEquals(2.0, th.getCartesianDistance(zwei),0);
 
     }
     @Test
@@ -51,11 +51,36 @@ public class CoordinateTests{
 
     //TODO test the overwritten equals method
     @Test
-    public void checkequals(){
-        CartesianCoordinate th = new CartesianCoordinate(1,1,1);
-        CartesianCoordinate zwei = new CartesianCoordinate(1,1,1);
+    public void checkequalsSpheric(){
+        SphericCoordinate th = new SphericCoordinate(1,1,1);
+        SphericCoordinate zwei = new SphericCoordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));
         assertEquals(false,th.isEqual(null));
         
+    }
+
+    @Test 
+    public void testCentralAngle(){
+        CartesianCoordinate coord = new CartesianCoordinate(1,2,3);
+        CartesianCoordinate other = new CartesianCoordinate(3,2,1);
+
+        double same = coord.getCentralAngle(coord);
+        assertEquals(0.0, same,0.001);
+        same = other.getCentralAngle(other);
+        assertEquals(0.0,same,0.001);
+
+        double tooother = coord.getCentralAngle(other);
+        assertEquals(0.7751933733103613,tooother,0.0001);
+    }
+    
+    @Test
+    public void testCartesianToSpheric(){
+        CartesianCoordinate coord = new CartesianCoordinate(1,2,3);
+        SphericCoordinate neu = coord.asSphericCoordinate();
+
+        assertEquals(3.7416573867739413,neu.getRadius(),0.001);
+        assertEquals(1.1071487177940904,neu.getPhi(),0.001);
+       
+
     }
 }
