@@ -38,7 +38,7 @@ public class CoordinateTests{
         //System.out.println(th.getCartesianDistance(zwei));
         SphericCoordinate a = new SphericCoordinate(1,2,3);
         SphericCoordinate b = new SphericCoordinate(4,5,6);
-        assertEquals(4.928711692867161, a.getCartesianDistance(b));
+        assertEquals(4.928711692867161, a.getCartesianDistance(b),0);
         assertEquals(2.0, th.getCartesianDistance(zwei),0);
     }
     @Test
