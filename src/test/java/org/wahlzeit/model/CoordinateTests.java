@@ -36,9 +36,10 @@ public class CoordinateTests{
         CartesianCoordinate zwei = new CartesianCoordinate(1,1,2);
         //System.out.println();
         //System.out.println(th.getCartesianDistance(zwei));
-        
+        SphericCoordinate a = new SphericCoordinate(1,2,3);
+        SphericCoordinate b = new SphericCoordinate(4,5,6);
+        assertEquals(4.928711692867161, a.getCartesianDistance(b));
         assertEquals(2.0, th.getCartesianDistance(zwei),0);
-
     }
     @Test
     public void checkisEquals(){
@@ -56,7 +57,6 @@ public class CoordinateTests{
         SphericCoordinate zwei = new SphericCoordinate(1,1,1);
         assertEquals(true,th.isEqual(zwei));
         assertEquals(false,th.isEqual(null));
-        
     }
 
     @Test 
@@ -78,9 +78,21 @@ public class CoordinateTests{
         CartesianCoordinate coord = new CartesianCoordinate(1,2,3);
         SphericCoordinate neu = coord.asSphericCoordinate();
 
+        
+        //angle in rad btw
         assertEquals(3.7416573867739413,neu.getRadius(),0.001);
         assertEquals(1.1071487177940904,neu.getPhi(),0.001);
-       
+        assertEquals(0.6405223126794245,neu.getTheta(),0.001);
+               
+    }
+    @Test
+    public void testSphericToCartesian(){
+        SphericCoordinate coord = new SphericCoordinate(1,2,3);
+        CartesianCoordinate neu = coord.asCartesianCoordinate();
+        
 
+        assertEquals(-0.05872664492762098,neu.getX(),0.001);
+        assertEquals(0.12832006020245673,neu.getY(),0.001);
+        assertEquals(-0.9899924966004454,neu.getZ(),0.001);       
     }
 }

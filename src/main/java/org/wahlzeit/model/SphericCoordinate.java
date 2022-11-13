@@ -38,7 +38,7 @@ public class SphericCoordinate implements Coordinate {
     @Override
     public CartesianCoordinate asCartesianCoordinate(){
         double x = this.radius * Math.cos(this.phi) * Math.sin(this.theta);
-        double y = this.radius * Math.cos(this.phi) * Math.sin(this.theta);
+        double y = this.radius * Math.sin(this.phi) * Math.sin(this.theta);
         double z = this.radius * Math.cos(this.theta);
         return new CartesianCoordinate(x,y,z);
     }
