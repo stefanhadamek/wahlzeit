@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 
     private double x;
     private double y;
@@ -43,48 +43,21 @@ public class CartesianCoordinate implements Coordinate {
         return erg;
     }
 
-    protected boolean isEqual(CartesianCoordinate coord){
+    @Override
+    public CartesianCoordinate asCartesianCoordinate(){
+        return this;
+    }
+
+    public boolean isEqual(CartesianCoordinate coord){
         if(coord == null){
             return false;
         }
         if(this == coord){
             return true;
         }
-        boolean erg = checkDoubleEqual(this.x,coord.x) && checkDoubleEqual(this.y,coord.y) && checkDoubleEqual(this.z,coord.z);
+        
+        boolean erg = checkDoubleEqual(this.x,coord.x) && checkDoubleEqual(this.y,coord.y) && checkDoubleEqual(this.z, coord.z);
         return erg;   
-    }
-
-    private boolean checkDoubleEqual(double a, double b){
-        double difference = 0;
-        if (a<=b){
-            difference = b-a;
-        } else {
-            difference = a-b;
-        }
-        if( difference < epsilon) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override 
-    public boolean equals(Object obj){
-        if(obj instanceof Coordinate){
-            return this.isEqual((Coordinate) obj);
-        }
-        return false;
-    }
-
-    @Override
-    public CartesianCoordinate asCartesianCoordinate(){
-        return this;
-    }
-
-    @Override
-    public double getCartesianDistance(Coordinate other){
-        double erg= this.getDistance(other.asCartesianCoordinate());
-        return erg;
     }
 
     @Override
@@ -99,15 +72,10 @@ public class CartesianCoordinate implements Coordinate {
         double theta= Math.acos(z/radius);
         return new SphericCoordinate(radius,phi,theta);
     }
-
-    @Override 
-    public double getCentralAngle(Coordinate other){
-        double erg= this.asSphericCoordinate().getCentralAngle(other);
+    @Override
+    public double getCartesianDistance(Coordinate other){
+        double erg= this.getDistance(other.asCartesianCoordinate());
         return erg;
     }
-    @Override
-    public boolean isEqual(Coordinate other){
-        other = other.asCartesianCoordinate();
-        return this.isEqual(other.asCartesianCoordinate());
-    }
+
 }
