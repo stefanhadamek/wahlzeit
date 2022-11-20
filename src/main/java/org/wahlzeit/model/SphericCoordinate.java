@@ -1,11 +1,12 @@
 
 package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
+import java.sql.*;
 public class SphericCoordinate extends AbstractCoordinate {
 
-    private double radius;
-    private double phi;
-    private double theta;
+    private Double radius;
+    private Double phi;
+    private Double theta;
     //final private double epsilon =1.0E-5;
 
 
@@ -13,6 +14,9 @@ public class SphericCoordinate extends AbstractCoordinate {
         this.radius = radius;
         this.phi = phi;
         this.theta = theta;
+    }
+    public SphericCoordinate(final ResultSet rset) throws SQLException {
+        readFrom(rset);
     }
 
     public double getRadius(){
@@ -47,7 +51,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     public SphericCoordinate asSphericCoordinate(){
         return this;
     }
-    //TODO 
+
     @Override 
     public double getCentralAngle(Coordinate other){
         SphericCoordinate coord = other.asSphericCoordinate();
@@ -77,5 +81,20 @@ public class SphericCoordinate extends AbstractCoordinate {
         boolean erg = this.isEqual((Coordinate) coord);
          //boolean erg = checkDoubleEqual(this.radius,coord.radius) && checkDoubleEqual(this.phi,coord.phi) && checkDoubleEqual(this.theta,coord.theta);
         return erg;
+    }
+    @Override
+    public void readFrom(ResultSet rset) throws SQLException {
+        if((radius == null) && (phi == null) && (theta == null)){
+            incWriteCount();
+        }
+        radius = rset.getDouble("loc_radius_coord");
+        phi = rset.getDouble("loc_phi_coord");
+        theta = rset.getDouble("loc_theta_coord"); 
+    }
+    @Override 
+    public void writeOn(ResultSet rset) throws SQLException{
+        rset.updateDouble("loc_radius_coord",radius);
+        rset.updateDouble("loc_phi_coord",phi);
+        rset.updateDouble("loc_theta_coord",theta);
     }
 }

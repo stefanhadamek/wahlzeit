@@ -1,9 +1,21 @@
 package org.wahlzeit.model;
 
+import org.junit.runner.RunWith;
+import org.junit.*;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.*;
+import org.mockito.Mockito.*;
 import org.junit.Test;
+import java.sql.SQLException;
+import java.sql.*;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CoordinateTests{
 
     @Test
@@ -50,7 +62,6 @@ public class CoordinateTests{
         
     }
 
-    //TODO test the overwritten equals method
     @Test
     public void checkequalsSpheric(){
         SphericCoordinate th = new SphericCoordinate(1,1,1);
@@ -89,10 +100,74 @@ public class CoordinateTests{
     public void testSphericToCartesian(){
         SphericCoordinate coord = new SphericCoordinate(1,2,3);
         CartesianCoordinate neu = coord.asCartesianCoordinate();
-        
-
         assertEquals(-0.05872664492762098,neu.getX(),0.001);
         assertEquals(0.12832006020245673,neu.getY(),0.001);
         assertEquals(-0.9899924966004454,neu.getZ(),0.001);       
     }
+    @Mock
+    private ResultSet rset;
+
+    @Before 
+    public void init(){
+        rset = mock(ResultSet.class);
+    }
+    @Test
+    public void testReadFromSpheric() throws SQLException{
+        when(rset.getDouble(eq("loc_radius_coord"))).thenReturn(1.37);
+        when(rset.getDouble(eq("loc_phi_coord"))).thenReturn(0.69); //nice
+        when(rset.getDouble(eq("loc_theta_coord"))).thenReturn(0.42);
+        SphericCoordinate coord = new SphericCoordinate(rset);
+        SphericCoordinate other = new SphericCoordinate(1.37,0.69,0.42);
+        assertEquals(coord, other);
+    }
+    @Test
+    public void testReadFromCartesian() throws SQLException{
+        when(rset.getDouble(eq("loc_x_coord"))).thenReturn(1.37);
+        when(rset.getDouble(eq("loc_y_coord"))).thenReturn(0.69); //nice
+        when(rset.getDouble(eq("loc_z_coord"))).thenReturn(0.42);
+        CartesianCoordinate coord = new CartesianCoordinate(rset);
+        CartesianCoordinate other = new CartesianCoordinate(1.37, 0.69, 0.42);
+        assertEquals(coord, other);
+    }
+
+    @Test
+    public void testWriteOnSpheric() throws SQLException {
+        SphericCoordinate coord = new SphericCoordinate(1.37, 0.69, 0.42);
+        coord.writeOn(rset);
+        verify(rset, times(1)).updateDouble(eq("loc_radius_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_phi_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_theta_coord"), anyDouble());
+    }
+
+    @Test
+    public void testWriteOnCartesian() throws SQLException {
+        CartesianCoordinate coord = new CartesianCoordinate(1.37, 0.69, 0.42);
+        coord.writeOn(rset);
+        verify(rset, times(1)).updateDouble(eq("loc_x_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_y_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_z_coord"), anyDouble());
+    }
+
+    @Test
+    public void testEqualsCartesian() {
+        final CartesianCoordinate coord = new CartesianCoordinate(1.37, 0.69, 0.42);
+        final CartesianCoordinate other = new CartesianCoordinate(1.37, 0.69, 0.42);
+        assertTrue(coord.equals(other));
+    }
+
+    @Test
+    public void testEqualsSpheric() {
+        final SphericCoordinate coord = new SphericCoordinate(1.37, 0.69, 0.42);
+        final SphericCoordinate other = new SphericCoordinate(1.37, 0.69, 0.42);
+        assertTrue(coord.equals(other));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testGetIdAsString() {
+        SphericCoordinate coordA = new SphericCoordinate(1.37, 0.69, 0.42);
+        CartesianCoordinate coordB = new CartesianCoordinate(1.37, 0.69, 0.42);
+        coordA.getIdAsString();
+        coordB.getIdAsString();
+    }
+
 }

@@ -1,7 +1,9 @@
 package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
+import org.wahlzeit.services.DataObject;
+import java.sql.*;
 
-public abstract class AbstractCoordinate implements Coordinate{
+public abstract class AbstractCoordinate extends DataObject implements Coordinate{
 
     @Override
     public boolean isEqual(Coordinate coord){
@@ -45,5 +47,20 @@ public abstract class AbstractCoordinate implements Coordinate{
     @Override 
     public double getCentralAngle(Coordinate other) {
         return this.asSphericCoordinate().getCentralAngle(other);
+    }
+
+    @Override 
+    public int hashCode(){
+        int erg = this.asCartesianCoordinate().hashCode();
+        return erg;
+    }
+    @Override
+    public String getIdAsString(){
+        throw new UnsupportedOperationException("Coord got no Id");
+    }
+
+    @Override
+    public void writeId(PreparedStatement stmt, int pos){
+        throw new UnsupportedOperationException("Coord got no Id");
     }
 }

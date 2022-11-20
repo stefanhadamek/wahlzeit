@@ -19,11 +19,12 @@ import org.wahlzeit.services.Language;
 @RunWith(MockitoJUnitRunner.class)
 public class PhotoTests{
 
-    @Test
+   /* @Test
     public void createPhotoWithNoLocation(){
         Photo ph= new Photo();
         assertEquals(null,ph.getLocation());
     }
+*/
     @Test
     public void createLocationTestSetMethods(){
         Photo ph= new Photo();

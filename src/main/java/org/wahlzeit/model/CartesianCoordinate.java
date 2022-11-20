@@ -1,10 +1,12 @@
 package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
+import java.sql.*;
+import java.util.Objects;
 public class CartesianCoordinate extends AbstractCoordinate {
 
-    private double x;
-    private double y;
-    private double z;
+    private Double x;
+    private Double y;
+    private Double z;
     //final private double epsilon =1.0E-5;
 
 
@@ -12,6 +14,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
         this.x=x;
         this.y=y;
         this.z=z;
+    }
+
+    public CartesianCoordinate(ResultSet rset) throws SQLException{
+        this.readFrom(rset);
     }
 
     public double getX(){
@@ -72,10 +78,31 @@ public class CartesianCoordinate extends AbstractCoordinate {
         double theta= Math.acos(z/radius);
         return new SphericCoordinate(radius,phi,theta);
     }
+    
     @Override
     public double getCartesianDistance(Coordinate other){
         double erg= this.getDistance(other.asCartesianCoordinate());
         return erg;
     }
+    
+    public int hashCode(){
+        return Objects.hash(this.getX(),this.getY(),this.getZ());
+    }
 
+    @Override
+    public void readFrom(ResultSet rset) throws SQLException {
+        if((x == null)&& (y == null) && (z == null)){
+            incWriteCount();
+        }
+        x = rset.getDouble("loc_x_coord");
+        y = rset.getDouble("loc_y_coord");
+        z = rset.getDouble("loc_z_coord"); 
+    }
+    @Override 
+    public void writeOn(ResultSet rset) throws SQLException{
+        rset.updateDouble("loc_x_coord",x);
+        rset.updateDouble("loc_y_coord",y);
+        rset.updateDouble("loc_z_coord",z);
+
+    }
 }
