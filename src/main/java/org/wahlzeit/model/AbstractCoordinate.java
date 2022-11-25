@@ -63,4 +63,18 @@ public abstract class AbstractCoordinate extends DataObject implements Coordinat
     public void writeId(PreparedStatement stmt, int pos){
         throw new UnsupportedOperationException("Coord got no Id");
     }
+
+    @Override 
+    public void writeOn(ResultSet rset) throws SQLException{
+        writeOnCartesian(rset);
+    }
+    
+    protected abstract void writeOnCartesian(ResultSet rset) throws SQLException;
+
+    @Override
+    public void readFrom(ResultSet rset)throws SQLException{
+        readFromCartesian(rset);
+    }
+
+    protected abstract void readFromCartesian(ResultSet rset) throws SQLException;
 }

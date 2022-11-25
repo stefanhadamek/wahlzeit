@@ -90,7 +90,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public void readFrom(ResultSet rset) throws SQLException {
+    protected void readFromCartesian(ResultSet rset) throws SQLException {
         if((x == null)&& (y == null) && (z == null)){
             incWriteCount();
         }
@@ -98,11 +98,13 @@ public class CartesianCoordinate extends AbstractCoordinate {
         y = rset.getDouble("loc_y_coord");
         z = rset.getDouble("loc_z_coord"); 
     }
+
     @Override 
-    public void writeOn(ResultSet rset) throws SQLException{
+    protected void writeOnCartesian(ResultSet rset) throws SQLException{
         rset.updateDouble("loc_x_coord",x);
         rset.updateDouble("loc_y_coord",y);
         rset.updateDouble("loc_z_coord",z);
-
     }
+
+   
 }

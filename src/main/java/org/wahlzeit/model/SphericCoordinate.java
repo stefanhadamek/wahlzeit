@@ -7,6 +7,10 @@ public class SphericCoordinate extends AbstractCoordinate {
     private Double radius;
     private Double phi;
     private Double theta;
+
+    private Double x_tocast;
+    private Double y_tocast;
+    private Double z_tocast;
     //final private double epsilon =1.0E-5;
 
 
@@ -91,10 +95,26 @@ public class SphericCoordinate extends AbstractCoordinate {
         phi = rset.getDouble("loc_phi_coord");
         theta = rset.getDouble("loc_theta_coord"); 
     }
-    @Override 
-    public void writeOn(ResultSet rset) throws SQLException{
-        rset.updateDouble("loc_radius_coord",radius);
-        rset.updateDouble("loc_phi_coord",phi);
-        rset.updateDouble("loc_theta_coord",theta);
+    @Override
+    protected void readFromCartesian(ResultSet rset) throws SQLException {
+        if((radius == null)&& (phi == null) && (theta == null)){
+            incWriteCount();
+        }
+
+        x_tocast = rset.getDouble("loc_x_coord");
+        y_tocast = rset.getDouble("loc_y_coord");
+        z_tocast = rset.getDouble("loc_z_coord");
+
+        radius = Math.sqrt((x_tocast*x_tocast) +(y_tocast*y_tocast)+(z_tocast*z_tocast));
+        phi = Math.atan2(y_tocast,x_tocast);
+        theta = Math.acos(z_tocast/radius);
     }
+
+    @Override 
+    protected void writeOnCartesian(ResultSet rset) throws SQLException{
+        rset.updateDouble("loc_x_coord",x_tocast);
+        rset.updateDouble("loc_y_coord",y_tocast);
+        rset.updateDouble("loc_z_coord",z_tocast);
+    }
+
 }

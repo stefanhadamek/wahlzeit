@@ -34,9 +34,7 @@ CREATE TABLE photos (
 	loc_y_coord double precision,
 	loc_z_coord double precision,
 	car_model text,
-	loc_radius_coord double precision,
-	loc_phi_coord double precision,
-	loc_theta_coord double precision
+	
 );
 
 CREATE TABLE tags (

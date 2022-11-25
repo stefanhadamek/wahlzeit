@@ -131,15 +131,6 @@ public class CoordinateTests{
     }
 
     @Test
-    public void testWriteOnSpheric() throws SQLException {
-        SphericCoordinate coord = new SphericCoordinate(1.37, 0.69, 0.42);
-        coord.writeOn(rset);
-        verify(rset, times(1)).updateDouble(eq("loc_radius_coord"), anyDouble());
-        verify(rset, times(1)).updateDouble(eq("loc_phi_coord"), anyDouble());
-        verify(rset, times(1)).updateDouble(eq("loc_theta_coord"), anyDouble());
-    }
-
-    @Test
     public void testWriteOnCartesian() throws SQLException {
         CartesianCoordinate coord = new CartesianCoordinate(1.37, 0.69, 0.42);
         coord.writeOn(rset);
