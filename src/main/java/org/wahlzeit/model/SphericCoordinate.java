@@ -83,7 +83,6 @@ public class SphericCoordinate extends AbstractCoordinate {
             return true;
             }
         boolean erg = this.isEqual((Coordinate) coord);
-         //boolean erg = checkDoubleEqual(this.radius,coord.radius) && checkDoubleEqual(this.phi,coord.phi) && checkDoubleEqual(this.theta,coord.theta);
         return erg;
     }
     @Override

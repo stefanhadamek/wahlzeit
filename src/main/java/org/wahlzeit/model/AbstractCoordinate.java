@@ -76,5 +76,6 @@ public abstract class AbstractCoordinate extends DataObject implements Coordinat
         readFromCartesian(rset);
     }
 
+
     protected abstract void readFromCartesian(ResultSet rset) throws SQLException;
 }
