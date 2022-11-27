@@ -11,12 +11,17 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
 
     public CartesianCoordinate(double x,double y,double z){
+        
         this.x=x;
         this.y=y;
         this.z=z;
+        assertClassInVariants();
     }
 
     public CartesianCoordinate(ResultSet rset) throws SQLException{
+        this.x = 0d;
+        this.y = 0d;
+        this.z = 0d;
         this.readFrom(rset);
     }
 
@@ -34,12 +39,15 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
    
     public void setX(double setx){
+        assertIsANumberAndNotInfinite(setx);
         this.x = setx;
     }
     public void setY(double sety){
+        assertIsANumberAndNotInfinite(sety);
         this.y = sety;
     }
     public void setZ(double setz){
+        assertIsANumberAndNotInfinite(setz);
         this.z = setz;
     }
 
@@ -97,6 +105,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
         x = rset.getDouble("loc_x_coord");
         y = rset.getDouble("loc_y_coord");
         z = rset.getDouble("loc_z_coord"); 
+        assertClassInVariants();
     }
 
     @Override 
@@ -106,5 +115,12 @@ public class CartesianCoordinate extends AbstractCoordinate {
         rset.updateDouble("loc_z_coord",z);
     }
 
+    @Override
+    protected void assertClassInVariants() {
+        assertIsANumberAndNotInfinite(x);
+        assertIsANumberAndNotInfinite(y);
+        assertIsANumberAndNotInfinite(z);
+        
+    }
    
 }

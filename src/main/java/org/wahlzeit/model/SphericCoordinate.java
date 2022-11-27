@@ -18,8 +18,12 @@ public class SphericCoordinate extends AbstractCoordinate {
         this.radius = radius;
         this.phi = phi;
         this.theta = theta;
+        assertClassInVariants();
     }
     public SphericCoordinate(final ResultSet rset) throws SQLException {
+        this.radius = 0d;
+        this.phi = 0d;
+        this.theta = 0d; 
         readFrom(rset);
     }
 
@@ -34,12 +38,15 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     public void setRadius(double radius){
+        assertIsANumberAndNotInfinite(radius);
          this.radius= radius;
     }
     public void setPhi(double phi){
+        assertIsANumberAndNotInfinite(phi);
          this.phi = phi;
     }
     public void setTheta(double theta){
+        assertIsANumberAndNotInfinite(theta);
          this.theta = theta;
     }
 
@@ -115,5 +122,14 @@ public class SphericCoordinate extends AbstractCoordinate {
         rset.updateDouble("loc_y_coord",y_tocast);
         rset.updateDouble("loc_z_coord",z_tocast);
     }
+
+       @Override
+    protected void assertClassInVariants() {
+        assertIsANumberAndNotInfinite(radius);
+        assertIsANumberAndNotInfinite(phi);
+        assertIsANumberAndNotInfinite(theta);
+    }
+
+
 
 }
