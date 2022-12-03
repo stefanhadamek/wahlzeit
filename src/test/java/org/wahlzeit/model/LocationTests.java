@@ -17,7 +17,8 @@ public class LocationTests{
   
     @Test
     public void setCoordinateTestonEmptyLoc(){
-        Location loc = new Location(null);
+        Coordinate co = null;
+        Location loc = new Location(co);
         CartesianCoordinate coord = new CartesianCoordinate(1,8,7);
         loc.setCoordinate(coord);
         assertEquals(coord,loc.getCoordinate().asCartesianCoordinate());

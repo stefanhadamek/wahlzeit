@@ -150,7 +150,11 @@ public class Photo extends DataObject {
 		creationTime = rset.getLong("creation_time");
 
 		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
+		try {
 		location=new Location(new CartesianCoordinate(rset.getDouble("loc_x_coord"),rset.getDouble("loc_y_coord"),rset.getDouble("loc_z_coord")));
+		} catch(IllegalArgumentException e) {
+			location = new Location(new CartesianCoordinate(0.0,0.0,0.0));
+		}
 	}
 	
 	/**
