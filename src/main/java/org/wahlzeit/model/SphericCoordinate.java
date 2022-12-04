@@ -40,14 +40,17 @@ public class SphericCoordinate extends AbstractCoordinate {
     public void setRadius(double radius){
         assertIsANumberAndNotInfinite(radius);
          this.radius= radius;
+         incWriteCount();
     }
     public void setPhi(double phi){
         assertIsANumberAndNotInfinite(phi);
          this.phi = phi;
+         incWriteCount();
     }
     public void setTheta(double theta){
         assertIsANumberAndNotInfinite(theta);
          this.theta = theta;
+         incWriteCount();
     }
 
     @Override

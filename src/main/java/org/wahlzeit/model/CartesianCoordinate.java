@@ -41,14 +41,17 @@ public class CartesianCoordinate extends AbstractCoordinate {
     public void setX(double setx){
         assertIsANumberAndNotInfinite(setx);
         this.x = setx;
+        incWriteCount();
     }
     public void setY(double sety){
         assertIsANumberAndNotInfinite(sety);
         this.y = sety;
+        incWriteCount();
     }
     public void setZ(double setz){
         assertIsANumberAndNotInfinite(setz);
         this.z = setz;
+        incWriteCount();
     }
 
     protected double getDistance(CartesianCoordinate coord){

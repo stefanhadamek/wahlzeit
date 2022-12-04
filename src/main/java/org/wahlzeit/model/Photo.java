@@ -176,12 +176,17 @@ public class Photo extends DataObject {
 		rset.updateInt("no_votes", noVotes);
 		rset.updateLong("creation_time", creationTime);
 		if(location != null){
+			try{
 			rset.updateDouble("loc_x_coord", location.getCoordinate().asCartesianCoordinate().getX());
 			rset.updateDouble("loc_y_coord", location.getCoordinate().asCartesianCoordinate().getY());
 			rset.updateDouble("loc_z_coord", location.getCoordinate().asCartesianCoordinate().getZ());
-		}
+			}catch(NullPointerException | IllegalArgumentException ill){
+				
+			}
+		
 			
-	}
+		}
+		}
 
 	/**
 	 * 
