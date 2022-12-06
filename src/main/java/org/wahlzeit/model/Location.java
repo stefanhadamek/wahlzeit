@@ -22,7 +22,7 @@ public class Location extends DataObject{
         }
     }
     public Location(ResultSet rset) throws SQLException{
-        this.coordinate =new CartesianCoordinate(rset);
+        this.coordinate =CartesianCoordinate.GetNewCoord(rset);
     }
 
     public Coordinate getCoordinate(){

@@ -30,10 +30,11 @@ CREATE TABLE photos (
 	praise_sum integer,
 	no_votes integer,
 	creation_time bigint,
-	loc_x_coord double precision,
-	loc_y_coord double precision,
-	loc_z_coord double precision,
-	car_model text,
+	loc_first_coord double precision,
+	loc_second_coord double precision,
+	loc_third_coord double precision,
+	loc_type_coord integer,
+	car_model text
 	
 );
 

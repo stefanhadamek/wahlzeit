@@ -29,6 +29,8 @@ public class CoordinateTests{
         assertEquals(187.0,coord.getY(),0);
         assertEquals(1337.0,coord.getZ(),0);
     }
+    // set methods are down
+    /*
     @Test
     public void createLocationTestSetMethods(){
         double x = 42.0;
@@ -42,6 +44,7 @@ public class CoordinateTests{
         assertEquals(y,coord.getY(),0);
         assertEquals(z,coord.getZ(),0);
     }
+    */
     @Test
     public void getDistanceTester(){
         CartesianCoordinate th = new CartesianCoordinate(1,1,4);
@@ -113,20 +116,20 @@ public class CoordinateTests{
     }
     @Test
     public void testReadFromSpheric() throws SQLException{
-        when(rset.getDouble(eq("loc_radius_coord"))).thenReturn(1.37);
-        when(rset.getDouble(eq("loc_phi_coord"))).thenReturn(0.69); //nice
-        when(rset.getDouble(eq("loc_theta_coord"))).thenReturn(0.42);
-        SphericCoordinate coord = new SphericCoordinate(rset);
-        SphericCoordinate other = new SphericCoordinate(1.37,0.69,0.42);
+        when(rset.getDouble(eq("loc_first_coord"))).thenReturn(1.37);
+        when(rset.getDouble(eq("loc_second_coord"))).thenReturn(0.69); //nice
+        when(rset.getDouble(eq("loc_third_coord"))).thenReturn(0.42);
+        SphericCoordinate coord = SphericCoordinate.GetNewCoord(rset);
+        SphericCoordinate other = SphericCoordinate.GetDBResult(1.37,0.69,0.42);
         assertEquals(coord, other);
     }
     @Test
     public void testReadFromCartesian() throws SQLException{
-        when(rset.getDouble(eq("loc_x_coord"))).thenReturn(1.37);
-        when(rset.getDouble(eq("loc_y_coord"))).thenReturn(0.69); //nice
-        when(rset.getDouble(eq("loc_z_coord"))).thenReturn(0.42);
-        CartesianCoordinate coord = new CartesianCoordinate(rset);
-        CartesianCoordinate other = new CartesianCoordinate(1.37, 0.69, 0.42);
+        when(rset.getDouble(eq("loc_first_coord"))).thenReturn(1.37);
+        when(rset.getDouble(eq("loc_second_coord"))).thenReturn(0.69); //nice
+        when(rset.getDouble(eq("loc_third_coord"))).thenReturn(0.42);
+        CartesianCoordinate coord = CartesianCoordinate.GetNewCoord(rset);
+        CartesianCoordinate other = CartesianCoordinate.GetDBResult(1.37, 0.69, 0.42);
         assertEquals(coord, other);
     }
 
@@ -134,9 +137,9 @@ public class CoordinateTests{
     public void testWriteOnCartesian() throws SQLException {
         CartesianCoordinate coord = new CartesianCoordinate(1.37, 0.69, 0.42);
         coord.writeOn(rset);
-        verify(rset, times(1)).updateDouble(eq("loc_x_coord"), anyDouble());
-        verify(rset, times(1)).updateDouble(eq("loc_y_coord"), anyDouble());
-        verify(rset, times(1)).updateDouble(eq("loc_z_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_first_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_second_coord"), anyDouble());
+        verify(rset, times(1)).updateDouble(eq("loc_third_coord"), anyDouble());
     }
 
     @Test

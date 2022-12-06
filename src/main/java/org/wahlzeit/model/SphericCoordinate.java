@@ -2,15 +2,22 @@
 package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
 import java.sql.*;
+import java.sql.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Objects;
 public class SphericCoordinate extends AbstractCoordinate {
 
-    private Double radius;
-    private Double phi;
-    private Double theta;
+    private static final Map<Integer, SphericCoordinate> lookupCoordinates = new HashMap<>();
 
-    private Double x_tocast;
-    private Double y_tocast;
-    private Double z_tocast;
+    final private Double radius;
+    final private Double phi;
+    final private Double theta;
+    /*
+    final private Double x_tocast;
+    final private Double y_tocast;
+    final private Double z_tocast;
+    */
     //final private double epsilon =1.0E-5;
 
 
@@ -20,13 +27,29 @@ public class SphericCoordinate extends AbstractCoordinate {
         this.theta = theta;
         assertClassInVariants();
     }
-    public SphericCoordinate(final ResultSet rset) throws SQLException {
+
+    public static SphericCoordinate GetNewCoord(ResultSet rset) throws SQLException{
+        final double newRadius = rset.getDouble("loc_first_coord");
+        final double newPhi = rset.getDouble("loc_second_coord");
+        final double newTheta = rset.getDouble("loc_third_coord");
+        final String type = rset.getString("loc_type_coord");
+        return GetDBResult(newRadius,newPhi,newTheta);
+    }
+    /*public SphericCoordinate(final ResultSet rset) throws SQLException {
         this.radius = 0d;
         this.phi = 0d;
         this.theta = 0d; 
         readFrom(rset);
     }
-
+    */
+    public static SphericCoordinate GetDBResult(double radius,double phi, double theta){
+        int key = Objects.hash(radius,phi,theta);
+        if(!lookupCoordinates.containsKey(key)){
+            lookupCoordinates.put(key, new SphericCoordinate(radius,phi,theta));
+        }
+        SphericCoordinate erg = lookupCoordinates.get(key);
+        return erg; 
+    }
     public double getRadius(){
         return this.radius;
     }
@@ -37,6 +60,7 @@ public class SphericCoordinate extends AbstractCoordinate {
         return this.theta;
     }
 
+    /*
     public void setRadius(double radius){
         assertIsANumberAndNotInfinite(radius);
          this.radius= radius;
@@ -52,13 +76,13 @@ public class SphericCoordinate extends AbstractCoordinate {
          this.theta = theta;
          incWriteCount();
     }
-
+    */
     @Override
     public CartesianCoordinate asCartesianCoordinate(){
         double x = this.radius * Math.cos(this.phi) * Math.sin(this.theta);
         double y = this.radius * Math.sin(this.phi) * Math.sin(this.theta);
         double z = this.radius * Math.cos(this.theta);
-        return new CartesianCoordinate(x,y,z);
+        return CartesianCoordinate.GetDBResult(x,y,z);
     }
 
     @Override 
@@ -95,16 +119,8 @@ public class SphericCoordinate extends AbstractCoordinate {
         boolean erg = this.isEqual((Coordinate) coord);
         return erg;
     }
-    @Override
-    public void readFrom(ResultSet rset) throws SQLException {
-        if((radius == null) && (phi == null) && (theta == null)){
-            incWriteCount();
-        }
-        radius = rset.getDouble("loc_radius_coord");
-        phi = rset.getDouble("loc_phi_coord");
-        theta = rset.getDouble("loc_theta_coord"); 
-    }
-    @Override
+    
+    /*@Override
     protected void readFromCartesian(ResultSet rset) throws SQLException {
         if((radius == null)&& (phi == null) && (theta == null)){
             incWriteCount();
@@ -118,15 +134,16 @@ public class SphericCoordinate extends AbstractCoordinate {
         phi = Math.atan2(y_tocast,x_tocast);
         theta = Math.acos(z_tocast/radius);
     }
-
+    */
     @Override 
     protected void writeOnCartesian(ResultSet rset) throws SQLException{
-        rset.updateDouble("loc_x_coord",x_tocast);
-        rset.updateDouble("loc_y_coord",y_tocast);
-        rset.updateDouble("loc_z_coord",z_tocast);
+        rset.updateDouble("loc_first_coord",radius);
+        rset.updateDouble("loc_second_coord",phi);
+        rset.updateDouble("loc_third_coord",theta);
+        rset.updateInt("loc_type_coord",CoordinateType.SPH.ordinal());
     }
 
-       @Override
+    @Override
     protected void assertClassInVariants() {
         assertIsANumberAndNotInfinite(radius);
         assertIsANumberAndNotInfinite(phi);

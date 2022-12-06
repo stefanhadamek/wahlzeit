@@ -2,8 +2,15 @@ package org.wahlzeit.model;
 import static org.wahlzeit.model.Constants.epsilon;
 import org.wahlzeit.services.DataObject;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractCoordinate extends DataObject implements Coordinate{
+
+    protected enum CoordinateType{
+        CART,
+        SPH,
+    };
 
     @Override
     public boolean isEqual(Coordinate coord){
@@ -91,13 +98,17 @@ public abstract class AbstractCoordinate extends DataObject implements Coordinat
 
     @Override
     public void readFrom(ResultSet rset)throws SQLException{
-        assertClassInVariants();
+        /*assertClassInVariants();
         assertNotNull(rset);
         readFromCartesian(rset);
         assertClassInVariants();
+        */
+        throw new UnsupportedOperationException(" This Method is deprecated. Try GetNewCoord instead.");
     }
 
-    protected abstract void readFromCartesian(ResultSet rset) throws SQLException;
+   
+
+    /*protected abstract void readFromCartesian(ResultSet rset) throws SQLException;*/
 
     protected void assertNotNull(Object obj){
         if(obj == null){
