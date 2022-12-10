@@ -17,7 +17,7 @@ public class Location extends DataObject{
         }
         else{
             // create default Coord to ensure no failure
-            Coordinate coord = GetDBResult(0,0,0);
+            Coordinate coord = CartesianCoordinate.GetDBResult(0,0,0);
             this.coordinate = coord; 
         }
     }
