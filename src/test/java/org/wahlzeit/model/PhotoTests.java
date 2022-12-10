@@ -28,7 +28,7 @@ public class PhotoTests{
     @Test
     public void createLocationTestSetMethods(){
         Photo ph= new Photo();
-        CartesianCoordinate coord = new CartesianCoordinate(42,187,1337);
+        CartesianCoordinate coord =CartesianCoordinate.GetDBResult(42,187,1337);
         Location loc = new Location(coord);
         ph.setLocation(loc);
         assertEquals(loc,ph.getLocation());
@@ -81,9 +81,10 @@ public class PhotoTests{
         assertEquals(PhotoStatus.getFromInt(6), ph.getStatus());
         
         assertEquals(187187187L, ph.getCreationTime());
-        Location loc = new Location(new CartesianCoordinate(1.87,1.337,1.69));
+        
+        Location loc = new Location(CartesianCoordinate.GetDBResult(1.87,1.337,1.69));
 
-        //assertEquals(true,loc.getCoordinate().isEqual(ph.getLocation().getCoordinate().asCartesianCoordinate()));
+        assertEquals(true,loc.getCoordinate().isEqual(ph.getLocation().getCoordinate().asCartesianCoordinate()));
     }
 
     @Test(expected = NullPointerException.class)

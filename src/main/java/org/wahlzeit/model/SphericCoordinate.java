@@ -21,7 +21,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     //final private double epsilon =1.0E-5;
 
 
-    public SphericCoordinate(double radius, double phi, double theta){
+    private SphericCoordinate(double radius, double phi, double theta){
         this.radius = radius;
         this.phi = phi;
         this.theta = theta;

@@ -13,7 +13,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
     //final private double epsilon =1.0E-5;
     private static final Map<Integer, CartesianCoordinate> lookupCoordinates = new HashMap<>();
 
-    public CartesianCoordinate(double x,double y,double z){
+    private CartesianCoordinate(double x,double y,double z){
         
         this.x=x;
         this.y=y;

@@ -26,12 +26,14 @@ public class Location extends DataObject{
     }
 
     public Coordinate getCoordinate(){
-        return this.coordinate.asCartesianCoordinate();
+        return this.coordinate;
     }
+    
     public void setCoordinate(Coordinate coord){
-         this.coordinate =coord;
+        
+        this.coordinate =coord;
     }
-
+    
     @Override
     public int hashCode(){
         return Objects.hash(getCoordinate());
@@ -53,7 +55,7 @@ public class Location extends DataObject{
         double x = rset.getDouble("loc_x_coord");
         double y = rset.getDouble("loc_y_coord");
         double z = rset.getDouble("loc_z_coord");
-        this.coordinate = new CartesianCoordinate(x,y,z);
+        this.coordinate = CartesianCoordinate.GetDBResult(x,y,z);
     }
 
     @Override
