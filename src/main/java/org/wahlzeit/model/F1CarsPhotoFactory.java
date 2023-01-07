@@ -1,8 +1,20 @@
 package org.wahlzeit.model;
+import org.wahlzeit.utils.PatternInstance;
 
 
 import java.sql.*;
 
+@PatternInstance(
+    patternName = " Abstract Factory",
+    participants ={
+        "AbstractFactory",
+        "ConcreteFActory"
+    }
+)
+@PatternInstance(
+    patternName= "Singelton",
+    participants = {}
+)
 
 public class F1CarsPhotoFactory extends PhotoFactory {
 

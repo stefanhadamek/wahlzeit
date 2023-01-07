@@ -4,7 +4,15 @@ import org.wahlzeit.services.DataObject;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import org.wahlzeit.utils.PatternInstance;
 
+
+@PatternInstance(
+    //Not sure if Facade or Servant is more fitting here,
+    // the Servant defines common functionality for a group of classes. AbstractCoordinate does this. Problem: methods are not static, but thats not an bottleneck in my opinion.
+    patternName ="Facade",
+    participants ={"ConcreteClass"}
+)
 public abstract class AbstractCoordinate extends DataObject implements Coordinate{
 
     protected enum CoordinateType{
@@ -46,6 +54,12 @@ public abstract class AbstractCoordinate extends DataObject implements Coordinat
         return false;
     }
 
+    @PatternInstance(
+            patternName = "Template Method",
+            participants = {
+                "Abstract Class", "Concrete Class"
+            }
+     )
     @Override 
     public double getCartesianDistance(Coordinate other){
         assertClassInVariants();
@@ -56,6 +70,13 @@ public abstract class AbstractCoordinate extends DataObject implements Coordinat
         assertNotNegative(distance);
         return distance;
     }
+
+    @PatternInstance(
+            patternName = "Template Method",
+            participants = {
+                "Abstract Class", "Concrete Class"
+            }
+    )
 
     @Override 
     public double getCentralAngle(Coordinate other) {

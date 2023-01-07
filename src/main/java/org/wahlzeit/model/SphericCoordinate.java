@@ -6,6 +6,12 @@ import java.sql.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Objects;
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+    patternName = "ValueObject",
+    participants = {}
+)
 public class SphericCoordinate extends AbstractCoordinate {
 
     private static final Map<Integer, SphericCoordinate> lookupCoordinates = new HashMap<>();

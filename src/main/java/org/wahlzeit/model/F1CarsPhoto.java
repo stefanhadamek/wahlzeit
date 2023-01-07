@@ -1,7 +1,15 @@
 package org.wahlzeit.model;
+import org.wahlzeit.utils.PatternInstance;
 
 import java.sql.*;
 
+
+@PatternInstance(
+    patternName = "Abstract Factory",
+    participants= {
+        "AbstractProduct",
+    }
+)
 public class F1CarsPhoto extends Photo {
 
     private String model;

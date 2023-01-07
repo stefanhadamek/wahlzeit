@@ -2,7 +2,13 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.util.Objects;
 import org.wahlzeit.services.DataObject;
+import org.wahlzeit.utils.PatternInstance;
 
+
+@PatternInstance(
+    patternName="Bridge",
+    participants={}
+)
 public class Location extends DataObject{
 
     /*
