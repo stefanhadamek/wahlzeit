@@ -34,7 +34,8 @@ CREATE TABLE photos (
 	loc_second_coord double precision,
 	loc_third_coord double precision,
 	loc_type_coord integer,
-	car_model text
+	car_model_generation text,
+	car_model_machine_type text
 	
 );
 

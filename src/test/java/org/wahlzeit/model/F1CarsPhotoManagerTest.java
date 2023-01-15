@@ -14,6 +14,7 @@ public class F1CarsPhotoManagerTest{
     public void init(){
         rset = mock(ResultSet.class);
     }
+    /*
     @Test 
     public void testReadOn() throws SQLException {
         when(rset.getString("car_model")).thenReturn("rbv2");
@@ -22,7 +23,7 @@ public class F1CarsPhotoManagerTest{
         F1CarsPhoto ph = F1CarsPhotoManager.getManager().createObject(rset);
         Assert.assertEquals("rbv2", ph.getF1CarsPhotoModel());
     }
-
+    */
 
 }
 

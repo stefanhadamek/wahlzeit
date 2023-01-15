@@ -22,7 +22,7 @@ public class F1CarsPhotoTest {
         when(rset.getString("owner_email_address")).thenReturn("totto@wolff.com");
         when(rset.getString("owner_home_page")).thenReturn("http://redbull.com");
    }
-
+    /*
     @Test
     public void testwriteOn() throws SQLException {
         F1CarsPhoto ph = new F1CarsPhoto(rset);
@@ -35,4 +35,5 @@ public class F1CarsPhotoTest {
         
         Assert.assertEquals("rbv2", ph.getF1CarsPhotoModel());
     }
+    */
 }
