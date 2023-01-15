@@ -89,7 +89,7 @@ public class F1Cars extends DataObject{
         }
         if(object instanceof F1Cars){
             //
-            return this.machine_type.equals(((F1Cars) object).getGeneration());
+            return this.generation.equals(((F1Cars) object).getGeneration());
         }
         return false;
     }

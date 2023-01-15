@@ -25,7 +25,6 @@ public class F1CarsType{
             return true;
         }
         if(object instanceof F1CarsType){
-            
             return this.machine_type.equals(((F1CarsType) object).getMachineType());
         }
         return false;

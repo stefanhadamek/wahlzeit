@@ -22,6 +22,10 @@ public class F1CarsManager extends ObjectManager{
     public F1CarsType createOrAquireF1CarsType(String name) {
         return F1CarsTypeMap.computeIfAbsent(name, F1CarsType::new);
     }
+    
+    public F1Cars createOrAquireF1Cars(String generation,F1CarsType engine) {
+        return new F1Cars(generation,engine);
+    }
 
     @Override
     protected F1Cars createObject(ResultSet rset)throws SQLException{

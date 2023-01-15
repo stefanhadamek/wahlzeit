@@ -27,7 +27,7 @@ public class F1CarsPhoto extends Photo {
     public F1Cars getF1Car(){
         return this.car;
     }
-    public void setF1CarsPhotoModel(F1Cars car){
+    public void setF1Cars(F1Cars car){
         this.car = car;
         incWriteCount();
     }
